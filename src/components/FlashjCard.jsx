@@ -28,6 +28,10 @@ export const FlashCard = ({en, ja, sec, player, index}) => {
 
     const seekTimeStamp = (e, sec) => {
       player.seekTo(sec);
+      if (player.getPlayerState() != 1){
+        player.playVideo()
+      }
+
     }
 
     return <>
