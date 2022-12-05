@@ -3,11 +3,14 @@ import AccordionSummary from '@mui/material/AccordionSummary';
 import AccordionDetails from '@mui/material/AccordionDetails';
 import Typography from '@mui/material/Typography';
 import Box from "@mui/material/Box"
-import Paper from '@mui/material/Paper'
-import { useRef } from "react";
+import Button from "@mui/material/Button"
+import { useRef, useState } from "react";
+import { getPaginationItemUtilityClass } from "@mui/material";
 
 
-export const FlashCard = ({en, ja, sec, player, index}) => {
+export const FlashCard = ({en, ja, sec, phrases, player, index}) => {
+    
+    const [isVisible, setIsVisible] = useState(false)
 
     const toHHMMSS = (secValue) => {
       const secInt = parseInt(secValue.toString(), 10);
@@ -39,11 +42,29 @@ export const FlashCard = ({en, ja, sec, player, index}) => {
         <Box component='a' href="#!" onClick={(e) => seekTimeStamp(e, sec)} sx={{fontSize:20}}>{toHHMMSS(sec)}</Box>
         <Accordion sx={{border:'solid', width:'100%', bgcolor:'skyblue'}}>
             <AccordionSummary>
-              <Typography align='center' sx={{'width':'100%'}}>フレーズ{index+1}</Typography>
+              <Typography align='center' sx={{'width':'100%', fontSize:25}}>
+                {index+1} 
+              </Typography>
             </AccordionSummary>
             <AccordionDetails sx={{textAlign:'center', overflow:'auto'}}>
-              <Box component='p' sx={{fontWeight:'bold', fontSize:20 ,m:0}}>{en}</Box>
-              <Box component='p' sx={{fontSize:15 ,m:0}}>{ja}</Box>
+              {isVisible ? 
+              <>
+                <Box sx={{display:'flex', justifyContent:"center"}}>
+                 <Button onClick={() => setIsVisible((isvisible) => !isvisible)} color='error' variant='contained'>-</Button>
+                 <Box component='p' sx={{fontWeight:'bold', fontSize:25 ,m:0 ,ml:3}}>{en}</Box>
+                </Box>
+                <Box component='p' sx={{fontSize:23 ,m:0}}>{ja}</Box>
+              </>
+              : 
+                <Button onClick={() => setIsVisible((isvisible) => !isvisible )} variant='contained'>+</Button>
+              }
+              <Box component='ul' sx={{display:'flex'}}>
+                {phrases.map((phrase, i) => {
+                return (
+                    <Box component='li' key={index.toString() + 'phrase-' + i.toString()} sx={{fontSize:23, mr:10}}>{phrase}</Box>
+                )
+                })}
+              </Box>
             </AccordionDetails>
         </Accordion>
       </Box>
