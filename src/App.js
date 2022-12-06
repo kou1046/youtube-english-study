@@ -26,12 +26,14 @@ function App() {
 
   return <>
     <Paper elevation={20} sx={{textAlign:'center', position:'sticky', top:0, zIndex:1000, pt:1, bgcolor:'skyblue'}}>
-      <Box component='h2'>{player?.playerInfo.videoData.title}</Box>
-      <ButtonGroup>
-        <Button variant='contained' onClick={() => resizeFunc(50)}>+</Button>
-        <Button variant='contained' color='error' onClick={() => resizeFunc(-50)}>-</Button>
-      </ButtonGroup>
-        <YouTube videoId={videoInfo.videoId} onReady={readyPlayer} style={{background:'black'}}></YouTube>
+      <Box sx={{display:'flex', justifyContent:'center'}}>
+        <Box component='h2' sx={{m:1.5}}>{player?.playerInfo.videoData.title}</Box>
+        <ButtonGroup>
+          <Button variant='contained' onClick={() => resizeFunc(50)}>+</Button>
+          <Button variant='contained' color='error' onClick={() => resizeFunc(-50)}>-</Button>
+        </ButtonGroup>
+      </Box>
+      <YouTube videoId={videoInfo.videoId} onReady={readyPlayer} style={{background:'black'}}></YouTube>
     </Paper>
     {videoInfo.flashCards.map((card, i) => <FlashCard {...card} player={player} index={i}></FlashCard>)}
   </>
