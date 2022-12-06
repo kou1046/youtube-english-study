@@ -11,8 +11,6 @@ function App() {
 
   const [player, setPlayer] = useState();
   const [playerWidth, setPlayerWidth] = useState();
-  const [cards, setCards] = useState([]);
-  const playerRef = useRef();
 
   const readyPlayer = (e) => {
     setPlayer(e.target)
@@ -27,7 +25,7 @@ function App() {
   }
 
   return <>
-    <Paper elevation={20} sx={{textAlign:'center', position:'sticky', top:0, zIndex:1000, pt:1, bgcolor:'skyblue'}} ref={playerRef}>
+    <Paper elevation={20} sx={{textAlign:'center', position:'sticky', top:0, zIndex:1000, pt:1, bgcolor:'skyblue'}}>
       <Box component='h2'>{player?.playerInfo.videoData.title}</Box>
       <ButtonGroup>
         <Button variant='contained' onClick={() => resizeFunc(50)}>+</Button>
